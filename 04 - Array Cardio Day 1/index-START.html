@@ -31,28 +31,75 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    var fifteen = inventors.filter(function(inventor) {
+      return inventor.year >=1500 && inventor.year < 1600;
+    });
+
+    //console.table(fifteen);
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+    var names = inventors.map(function(inventor) {
+      return inventor.first + ' ' + inventor.last;
+    })
+
+    //console.table(names);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    var sorted = inventors.sort(function(a,b) {
+      //returns 1 or -1
+      return a.year > b.year ? 1 : -1;
+    });
+
+    //console.table(sorted);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    var totalYears = inventors.reduce(function(accumulator, inventor) {
+      return accumulator + (inventor.passed - inventor.year);
+    }, 0);
+
+    //console.log(totalYears);
 
     // 5. Sort the inventors by years lived
+    var sortedByYearsLived = inventors.sort(function(a,b) {
+      return (a.passed - b.year) > (b.passed - b.year) ? 1 : -1;
+    })
+
+    //console.table(sortedByYearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    //run in colsole on site
+    console.table(Array.prototype.slice.call(document.querySelectorAll('.mw-category li a')).map(function(elem) {
+        return elem.text;
+    }).filter(function(street) {
+        return street.includes('de');
+    }));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    var sortedPeople = people.sort();
+
+    //console.table(sortedPeople);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    var dataCount = data.reduce(function(obj, item) {
+      if (obj[item]) {
+        obj[item] += 1;
+      } else {
+        obj[item] = 1;
+      }
+      return obj;
+    }, {});
+
+    console.log(dataCount);
+
 
   </script>
 </body>
